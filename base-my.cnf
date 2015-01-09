@@ -1,0 +1,41 @@
+[client]
+socket                         = $homedir/mysql.sock
+
+[mysql]
+port                           = 3306
+socket                         = $homedir/mysql.sock
+
+[mysqld_safe]
+socket                         = $homedir/mysql.sock
+pid-file                       = $homedir/mysql.pid
+basedir                        = $basedir
+datadir                        = $datadir
+
+[mysqladmin]
+socket                         = $homedir/mysql.sock
+
+[mysqld]
+# GENERAL #
+basedir                        = $basedir
+datadir                        = $datadir
+user                           = $user
+default-storage-engine         = InnoDB
+socket                         = $homedir/mysql.sock
+pid-file                       = $homedir/mysql.pid
+bind-address                   = 0.0.0.0
+
+skip-name-resolve
+
+innodb                         = FORCE
+innodb-autoinc-lock-mode       = 2
+
+# BINARY LOGGING #
+binlog-format                  = row
+
+
+# LOGGING #
+log-error                      = $logsdir/mysql-error.log
+slow-query-log-file            = $logsdir/mysql-slow.log
+
+[mariadb]
+wsrep_provider                 = $basedir/lib/libgalera_smm.so

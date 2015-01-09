@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import sys
+import argparse
+import subprocess
+
+currentuser = subprocess.check_output("whoami").replace("\n","")
+
+parser = argparse.ArgumentParser(description='MariaDB Galera installation script.')
+
+parser.add_argument('-v','--version', help='MariaDB Galera version to be installed', metavar='', default='10.0.15')
+parser.add_argument('-c','--configfile', default='my.cnf',type=argparse.FileType('w'), help='path to my.cnf configuration file', metavar='')
+parser.add_argument('-t','--targetdir', help='target installation directory ', metavar='', default='.')
+parser.add_argument('-u','--user', help='user that will run MariaDB', metavar='', default=currentuser)
+
+args = parser.parse_args()
+
+
+homedir=args.targetdir + "/mariadb-galera-" + args.version
+datadir=homedir + "/data"
+confdir=homedir + "/conf"
+basedir=homedir + "/mariadb"
+logsdir=homedir + "/logs"
+mycnfpath=confdir + "/my.cnf"
+
+print homedir
+subprocess.call(["mkdir ","-p","./lala"])
+subprocess.call(["mkdir -p ",datadir])
+subprocess.call(["mkdir -p ",confdir])
+subprocess.call(["mkdir -p ",basedir])
+subprocess.call(["mkdir -p ",logsdir])
+
+print args
